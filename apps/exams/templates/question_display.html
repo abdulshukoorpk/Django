@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Exam home{% endblock %}
+{% block head %}Answer the following questions{% endblock %}
+{% block content %}
+
+<h1>Hello <a href = "/accounts/home">{{user}}</a> you have to answer the following question(s)</h1>
+
+
+<form action="/exams/{{test.id}}/{{index}}/save" method = "post">
+{% csrf_token %}
+	<p>{{question_id}}.{{question}}</p>
+	<li>{%for option in question.options.all %}</li>
+		<input type="radio" name="option" id="option{{ forloop.counter }}" value="{{ option.id }}" />
+    	<label for="option{{ forloop.counter }}">{{ option.option_text }}</label><br />
+		{% endfor %}
+	<input type="submit" value="Submit" />	
+	
+
+
+</p>
+</form>
+
+
+{% endblock %}
+
+
+
+
+
+<li>{{option}}</li>
