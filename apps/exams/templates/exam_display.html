@@ -5,6 +5,12 @@
 {% block content %}
 
 <h1>Hello <a href = "/accounts/home">{{user}}</a> you have to take the following test(s)</h1>
+{% if status_message %}
+<p>{{status_message}}</p>
+{% else %}
 <p> <a href = "/exams/{{exam_id}}/1">{{exam_name}}</a></p>
+{% endif %}
+
+
 
 {% endblock %}

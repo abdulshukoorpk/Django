@@ -1,6 +1,9 @@
-{% extends base.html%}
-{% block title %}Exam home{% endblock %}
-{% block head %}Select an exam{% endblock %}
+{% extends "base.html" %}
+{% block title %}Result Page{% endblock %}
+{% block head %} Here's your exam results {% endblock %}
+{% block content %}
 
-{% block content%}
-{% endblock %}
+	<h1> hello {{user}}  </h1>
+	<p>You have entered correct answers {{currect_answer_count}}times.You have scored {{mark}} marks!! </p>
+
+ {% endblock %}

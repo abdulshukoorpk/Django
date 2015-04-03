@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
             name='Option',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('option', models.CharField(max_length=50)),
+                ('option_text', models.CharField(max_length=50)),
+                ('is_right_answer', models.BooleanField(default=False)),
             ],
             options={
             },
@@ -33,7 +34,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='option',
             name='question',
-            field=models.ForeignKey(to='questions.Question'),
+            field=models.ForeignKey(related_name='options', to='questions.Question'),
             preserve_default=True,
         ),
     ]

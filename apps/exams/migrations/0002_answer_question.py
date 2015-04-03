@@ -7,14 +7,15 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('questions', '0005_auto_20150304_0822'),
+        ('questions', '0001_initial'),
+        ('exams', '0001_initial'),
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='option',
+        migrations.AddField(
+            model_name='answer',
             name='question',
-            field=models.ForeignKey(related_name='options', to='questions.Question'),
+            field=models.ManyToManyField(related_name='answers', to='questions.Question'),
             preserve_default=True,
         ),
     ]

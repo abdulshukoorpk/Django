@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
 # Create your models here.
 from apps.questions.models import Option, Question
-
 
 class Exam(models.Model):
 	name = models.CharField(max_length=50)
@@ -14,9 +12,16 @@ class Exam(models.Model):
 
 
 class Test(models.Model):
+	STATUS  = (
+	(0, 'not started'),
+	(1, 'Active'),
+	(2, 'Completed'),
+	)
+
 	name = models.CharField(max_length=20)
 	user = models.ForeignKey(User, related_name='tests')
 	exam = models.ForeignKey(Exam, related_name='tests')
+	status = models.PositiveSmallIntegerField(choices=STATUS)
 	def __unicode__(self):
 		return self.name
 
@@ -32,10 +37,10 @@ class Test(models.Model):
 class Answer(models.Model):
 	selected_option = models.ForeignKey(Option, related_name='answers')
 	test = models.ForeignKey(Test, related_name='answers')
-	#user = models.ForeignKey(User, related_name='users')
+	question = models.ManyToManyField(Question, related_name='answers')
 	
 	@property
 	def is_correct(self):
-		return option.is_right_answer;
+		return self.selected_option.is_right_answer
 
 	

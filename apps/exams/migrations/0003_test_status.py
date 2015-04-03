@@ -7,14 +7,14 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('exams', '0003_auto_20150305_0925'),
+        ('exams', '0002_answer_question'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='test',
-            name='name',
-            field=models.CharField(default='test1', max_length=20),
+            name='status',
+            field=models.PositiveSmallIntegerField(default=0, choices=[(0, b'not started'), (1, b'Active'), (2, b'Completed')]),
             preserve_default=False,
         ),
     ]

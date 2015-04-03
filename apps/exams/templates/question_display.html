@@ -8,7 +8,8 @@
 
 <form action="/exams/{{test.id}}/{{index}}/save" method = "post">
 {% csrf_token %}
-	<p>{{question_id}}.{{question}}</p>
+	<p>({{index}}/{{question_count}})</p>
+	<p>{{question}}</p>
 	<li>{%for option in question.options.all %}</li>
 		<input type="radio" name="option" id="option{{ forloop.counter }}" value="{{ option.id }}" />
     	<label for="option{{ forloop.counter }}">{{ option.option_text }}</label><br />
@@ -27,4 +28,3 @@
 
 
 
-<li>{{option}}</li>
