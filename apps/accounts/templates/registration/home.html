@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Welcome to Django{% endblock %}
+{% block head %}Welcome to Django{% endblock %}
+{% block content %}
+    <p>Welcome {{ user.username }} !!!</p>
+    <a href="/accounts/">Logout</a>
+    <p> <a href="/exams/home"> Click to go to your Exam page</a></p>
+{% endblock %}
+
+
+
