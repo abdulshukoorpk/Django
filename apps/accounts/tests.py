@@ -1,4 +1,4 @@
-from django.test import TestCase, LiveServerTestCase
+from django.test import LiveServerTestCase, TestCase,
 from django.contrib.auth.models import User
 
 from selenium import webdriver
@@ -7,78 +7,76 @@ from apps.accounts.forms import RegistrationForm
 from apps.accounts.views import *
 from apps.exams import views
 
-# Create your tests here.
+# Create your tests he re.
+
 
 class RegistrationTestCase(TestCase):
-	
-	def setUp(self):
-	# 	# User.objects.create_user(
-	# 	# 	username='test1',
-	# 	# 	email='test1@test.com',
-	# 	# 	password='test1',
-	# 	# 	# password_confirm='test1'
-	# 	# 	)
-		
-		self.selenium = webdriver.Firefox()
-		self.selenium.maximize_window()
-		super(RegistrationTestCase, self).setUp()
-		# pass
 
-	# def tearDown(self):
-	# 	self.selenium.quit()
-	# 	super(RegistrationTestCase, self).tearDown()
+    def setUp(self):
+        self.selenium = webdriver.Firefox()
+        self.selenium.maximize_window()
+        super(RegistrationTestCase, self).setUp()
 
-	
-	def test_login_fail(self):
-		"""
-		Test case where user inputs wrong password
+    def tearDown(self):
+        self.selenium.quit()
+        super(RegistrationTestCase, self).tearDown()
 
-		"""
-		print "testing login failure..."
-		login_page = self.selenium.get('http://127.0.0.1:8000/accounts/login/')
-		username = self.selenium.find_element_by_id('id_username')
-		username.send_keys('testuser')
-		password = self.selenium.find_element_by_id('id_password')
+    def test_0_login_fail(self):
+        """
+        Test case where user inputs wrong password
 
-		password.send_keys('tes')
-		self.selenium.find_element_by_xpath('//input[@value = "Login"]').click()
-		current_page = self.selenium.current_url
-		self.assertEquals(current_page, 'http://127.0.0.1:8000/accounts/login/')
+        """
+        print self.test_0_login_fail.__doc__
+        login_page = self.selenium.get('http://127.0.0.1:8000/accounts/login/')
+        username = self.selenium.find_element_by_id('id_username')
+        username.send_keys('testuser1')
+        password = self.selenium.find_element_by_id('id_password')
+        password.send_keys('tes')
+        self.selenium.find_element_by_xpath(
+            '//input[@value = "Login"]').click()
+        current_page = self.selenium.current_url
+        self.assertEquals(
+            current_page, 'http://127.0.0.1:8000/accounts/login/')
 
-	
-	def test_login_pass(self):
-		"""
-		Test case where user inputs accurate password
-	
-		"""
-		login_page = self.selenium.get('http://127.0.0.1:8000/accounts/login/')
-		username = self.selenium.find_element_by_id('id_username')
-		username.send_keys('testuser')
-		password = self.selenium.find_element_by_id('id_password')
+    def test_1_login_pass(self):
+        """
+        Test case where user inputs accurate password
 
-		password.send_keys('test')
-		self.selenium.find_element_by_xpath('//input[@value = "Login"]').click()
-		current_page = self.selenium.current_url
-		self.assertEquals(current_page, 'http://127.0.0.1:8000/accounts/home/')
+        """
+        print self.test_1_login_pass.__doc__
+        login_page = self.selenium.get('http://127.0.0.1:8000/accounts/login/')
+        username = self.selenium.find_element_by_id('id_username')
+        username.send_keys('testuser1')
+        password = self.selenium.find_element_by_id('id_password')
+        password.send_keys('test')
+        self.selenium.find_element_by_xpath(
+            '//input[@value = "Login"]').click()
+        current_page = self.selenium.current_url
+        self.assertEquals(current_page, 'http://127.0.0.1:8000/accounts/home/')
 
-	def test_exam_page(self):
-		"""
-		Test case for checking exam link on user home page
-		
-		"""
-		login_page = self.selenium.get('http://127.0.0.1:8000/accounts/login/')
+    def test_2_exam_page(self):
+        """
+        Test case for checking exam link on user home page
 
-		username = self.selenium.find_element_by_id('id_username')
-		username.send_keys('testuser')
-		password = self.selenium.find_element_by_id('id_password')
-		password.send_keys('test')
-		self.selenium.find_element_by_xpath('//input[@value = "Login"]').click()
-		current_page = self.selenium.get('http://127.0.0.1:8000/accounts/home/')
-		next_page = self.selenium.find_element_by_link_text(
-			"Click to go to your Exam page").click()
-		self.assertEquals(self.selenium.current_url, 'http://127.0.0.1:8000/exams/home/')
+        """
+        print self.test_2_exam_page.__doc__
+        login_page = self.selenium.get('http://127.0.0.1:8000/accounts/login/')
+        username = self.selenium.find_element_by_id('id_username')
+        username.send_keys('testuser1')
+        password = self.selenium.find_element_by_id('id_password')
+        password.send_keys('test')
+        self.selenium.find_element_by_xpath(
+            '//input[@value = "Login"]').click()
+        current_page = self.selenium.get(
+            'http://127.0.0.1:8000/accounts/home/')
+        next_page = self.selenium.find_element_by_link_text(
+            "Click to go to your Exam page").click()
+        self.assertEquals(
+            self.selenium.current_url, 'http://127.0.0.1:8000/exams/home/')
 
 
-	
-
-
+# if __name__ == "__main__":
+# 	docs = RegistrationTestCase()
+# 	print docs.test_0_login_fail.__doc__
+# 	docs.test_1_login_pass.__doc__
+# 	docs.test_2_exam_page.__doc__

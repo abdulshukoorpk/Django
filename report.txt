@@ -1,0 +1,44 @@
+Creating test database for alias 'default' (':memory:')...
+Operations to perform:
+  Apply all migrations: sessions, admin, auth, contenttypes, exams, questions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying questions.0001_initial... OK
+  Applying exams.0001_initial... OK
+  Applying exams.0002_answer_question... OK
+  Applying exams.0003_test_status... OK
+  Applying sessions.0001_initial...test_0_login_fail (apps.accounts.tests.RegistrationTestCase) ... ok
+test_1_login_pass (apps.accounts.tests.RegistrationTestCase) ... ok
+test_2_exam_page (apps.accounts.tests.RegistrationTestCase) ... ok
+test_5_question_display (apps.exams.tests.ExamTestCase) ... ok
+test_6_option_selection (apps.exams.tests.ExamTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 36.775s
+
+OK
+ OK
+
+		Test case where user inputs wrong password
+
+		
+
+		Test case where user inputs accurate password
+	
+		
+
+		Test case for checking exam link on user home page
+		
+		
+
+		Test to check whether questions are displayed or not
+		
+
+		Test to check if user can select and submit answers
+		
+
+		Test to check whether questions are displayed or not
+		
+Destroying test database for alias 'default' (':memory:')...
