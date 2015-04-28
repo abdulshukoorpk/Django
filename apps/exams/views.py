@@ -14,7 +14,21 @@ from apps.exams.forms import ExamForm, TestForm
 def exam_list(request):
     user = request.user
     test_name = Test.objects.filter(user=user).exclude(status=2)
-    print 'trrrrrrr%s' % test_name
+    if test_name:
+        for test in test_name:
+            exam_name = test.exam.name
+            exam_id = test.exam.id
+        context = {'user': user, 'exam_name': exam_name, 'exam_id': exam_id}
+    else:
+        status_message = 'You have no pending test'
+        context = {'user': user, 'status_message': status_message}
+    return render_to_response('exam_display.html', context)
+
+
+@login_required
+def exam_list(request):
+    user = request.user
+    test_name = Test.objects.filter(user=user).exclude(status=2)
     if test_name:
         for test in test_name:
             exam_name = test.exam.name
@@ -33,9 +47,7 @@ def get_question(request, test_id, index):
     user = request.user
     test = get_object_or_404(Test, pk=test_id)
     exam = test.exam
-    print exam
     exam_id = exam.id
-    print exam.id
     question = exam.questions.all()[int(index) - 1]
     question_count = test.count_question
     question_id = question.id
@@ -60,7 +72,6 @@ def get_question(request, test_id, index):
 @csrf_exempt
 def save_answer(request, test_id, index):
     if request.method == 'POST':
-
         user = request.user
         test = get_object_or_404(Test, pk=test_id)
         exam = test.exam
@@ -69,11 +80,6 @@ def save_answer(request, test_id, index):
         options = question.options.filter(question=question)
         selected_option_id = request.POST.get(key='option')
         selected_option = Option.objects.get(pk=selected_option_id)
-        print "selected option is %s" % selected_option
-
-        print 'as'
-        print len(Answer.objects.all())
-        print 'yu'
         answer = Answer.objects.create(
             selected_option=selected_option, test=test
         )
@@ -96,11 +102,8 @@ def result(request, test_id):
     question_count = test.count_question
     currect_answer_count = test.count_right
     mark = currect_answer_count * 5
-    print test.STATUS
-    print test.status
     test.status = 2
     test.save()
-    print test.status
     context = {
         'user': user,
         'test': test,
@@ -108,8 +111,4 @@ def result(request, test_id):
         'question_count': question_count,
         'mark': mark,
     }
-    print 'iiiipppp'
-    print question_count
-    print currect_answer_count
-    print context
     return render(request, 'result_display.html', context)

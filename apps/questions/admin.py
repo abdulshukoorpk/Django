@@ -15,4 +15,15 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [OptionInline]
 
 
+class OptionInline(admin.TabularInline):
+    model = Option
+    # fields = ['option','is_right_answer']
+    extra = 4
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    fields = ['question_text']
+    inlines = [OptionInline]
+
+
 admin.site.register(Question, QuestionAdmin)

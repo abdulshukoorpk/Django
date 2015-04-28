@@ -10,7 +10,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
-
 import sys
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -22,8 +21,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -72,11 +69,15 @@ WSGI_APPLICATION = 'exam_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 DATABASES = {}
-
 if 'test' in sys.argv:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'test_exam_site2',
+import sys
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+    'ENGINE':'django.db.backends.sqlite3',
+    'NAME': 'test_exam_site2',
     }
 else:
     DATABASES = {

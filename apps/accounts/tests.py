@@ -73,10 +73,3 @@ class RegistrationTestCase(TestCase):
             "Click to go to your Exam page").click()
         self.assertEquals(
             self.selenium.current_url, 'http://127.0.0.1:8000/exams/home/')
-
-
-# if __name__ == "__main__":
-# 	docs = RegistrationTestCase()
-# 	print docs.test_0_login_fail.__doc__
-# 	docs.test_1_login_pass.__doc__
-# 	docs.test_2_exam_page.__doc__
