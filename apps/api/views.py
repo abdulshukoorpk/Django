@@ -1,4 +1,6 @@
 from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
+
 
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -45,7 +47,6 @@ class ExamViewSet(viewsets.ModelViewSet):
         print exam
         serializer = ExamSerializer(exam, many=True)
         return Response(serializer.data)
-
 
 
 class TestViewSet(viewsets.ModelViewSet):
