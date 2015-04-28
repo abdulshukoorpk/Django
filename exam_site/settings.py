@@ -73,7 +73,7 @@ if 'test' in sys.argv:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'test_exam_site2',
-import sys
+        }
 if 'test' in sys.argv:
     DATABASES['default'] = {
     'ENGINE':'django.db.backends.sqlite3',
