@@ -26,21 +26,6 @@ def exam_list(request):
 
 
 @login_required
-def exam_list(request):
-    user = request.user
-    test_name = Test.objects.filter(user=user).exclude(status=2)
-    if test_name:
-        for test in test_name:
-            exam_name = test.exam.name
-            exam_id = test.exam.id
-        context = {'user': user, 'exam_name': exam_name, 'exam_id': exam_id}
-    else:
-        status_message = 'You have no pending test'
-        context = {'user': user, 'status_message': status_message}
-    return render_to_response('exam_display.html', context)
-
-
-@login_required
 @csrf_exempt
 def get_question(request, test_id, index):
 

@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponseRedirect
-from django.template import RequestContext
+from django.http import HttpResponseRedirect, HttpResponse
+from django.template import RequestContext, loader
 
 from apps.accounts.forms import RegistrationForm
 from django.shortcuts import render
@@ -14,23 +14,22 @@ from django.shortcuts import render
 @csrf_protect
 def register(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
+        register_form = RegistrationForm(request.POST)
+        if register_form.is_valid():
             user = User.objects.create_user(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password'],
-                email=form.cleaned_data['email'],
+                username=register_form.cleaned_data['username'],
+                password=register_form.cleaned_data['password'],
+                email=register_form.cleaned_data['email'],
             )
             return HttpResponseRedirect('success/')
 
     else:
-        form = RegistrationForm()
+        register_form = RegistrationForm()
 
-    variables = RequestContext(request, {
-        'form': form
-    })
-    return render_to_response('registration/register.html',
-                              variables)
+    context = RequestContext(request, {
+        'register_form': register_form
+        })
+    return render_to_response('registration/register.html',context)
 
 
 def register_success(request):

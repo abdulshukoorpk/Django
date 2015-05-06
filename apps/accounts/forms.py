@@ -1,14 +1,19 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.forms.formsets import formset_factory
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 
 
 class RegistrationForm(forms.Form):
-    # TODO: Define form fields here
+
     username = forms.CharField(widget=forms.TextInput(
         attrs=dict(max_length=30, required=True)),
         label='User name',
-        # error_messages={'requred':'Please enter a user name'}
+        error_messages={'requred': 'Please enter a user name'}
     )
 
     email = forms.EmailField(widget=forms.EmailInput(
@@ -29,8 +34,12 @@ class RegistrationForm(forms.Form):
         # error_messages={'requred':'Please repeat the password'}
     )
 
+    helper = FormHelper()
+    helper.form_method = "POST"
+    helper.add_input(Submit('register', 'Register', css_class='btn-primary'))
+    # helper.add_input(Submit('login', 'Login', css_class='btn-secondary'))
+
     def clean(self):
-        # self.cleaned_data = super(RegistrationForm, self).clean()
         username = self.cleaned_data.get('username')
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')

@@ -1,9 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 
-
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, detail_route, list_route
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import viewsets
@@ -21,12 +20,11 @@ class QuestionViewSet(viewsets.ModelViewSet):
     serializer_class = QuestionSerializer
 
     def list(self, request, exams_pk=None):
-        
+
         exam = get_object_or_404(Exam, pk=exams_pk)
         question_list = exam.questions.all()
         serializer = QuestionSerializer(question_list, many=True)
         return Response(serializer.data)
-        
 
     def retrieve(self, request, pk=None, exams_pk=None):
         exam = get_object_or_404(Exam, pk=exams_pk)
@@ -53,3 +51,8 @@ class TestViewSet(viewsets.ModelViewSet):
     queryset = Test.objects.all()
     serializer_class = TestSerializer
     permission_classes = (permissions.IsAssignedUser,)
+
+    @list_route(methods=['get'], permission_classes=(permissions.IsAssignedUser,))
+    def user(self, request):
+        self.queryset = self.queryset.filter(user=request.user)
+        return super(TestViewSet, self).list(self, request)

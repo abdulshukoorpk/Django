@@ -2,11 +2,19 @@
 {% block title %}User Registration{% endblock %}
 {% block head %}User Registration{% endblock %}
 {% block content %}
-    <form method="post" action=".">{% csrf_token %}
-        <table border="0">
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Register" />
+{% load crispy_forms_tags %}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+    <form method="post"  action="." >
+    {% csrf_token %}
+        <!-- <table border="0"> -->
+        <div class = "container">
+            <div class = "raw">
+            {% crispy register_form%}
+            <a href="/accounts/login/">Login</a>
+        <!-- </table> -->
+            </div>
+        </div>
     </form>
-    <a href="/accounts/">Login</a>
 {% endblock %}

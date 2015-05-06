@@ -34,6 +34,9 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+
 
 # Application definition
 
@@ -49,6 +52,9 @@ INSTALLED_APPS = (
     'apps.accounts',
     'rest_framework',
     'apps.api',
+    'crispy_forms',
+    'coverage',
+    'model_mommy',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,10 +62,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'apps.accounts.middleware.UserMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'apps.accounts.middleware.UserMiddleware'
 )
 
 ROOT_URLCONF = 'exam_site.urls'
