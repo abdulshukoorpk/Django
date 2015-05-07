@@ -83,16 +83,16 @@ WSGI_APPLICATION = 'exam_site.wsgi.application'
 #     'NAME': 'test_exam_site2',
 #     }
 # else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'exam_site2',
-            'USER': 'shukoor',
-            'PASSWORD': 'rawdata',
-            'HOST': '',
-            'PORT': '',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'exam_site2',
+        'USER': 'shukoor',
+        'PASSWORD': 'rawdata',
+        'HOST': 'localhost',
+        'PORT': '',
     }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -113,7 +113,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-import dj_database_url
+# import dj_database_url
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 

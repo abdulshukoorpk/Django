@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
+from django.util.six import BytesIO
 
 from rest_framework import status
 from rest_framework.decorators import api_view, detail_route, list_route
@@ -7,6 +8,8 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.parsers import JSONParser
+
 
 from apps.questions.models import Question, Option
 from apps.exams.models import Exam, Test
@@ -24,6 +27,11 @@ class QuestionViewSet(viewsets.ModelViewSet):
         exam = get_object_or_404(Exam, pk=exams_pk)
         question_list = exam.questions.all()
         serializer = QuestionSerializer(question_list, many=True)
+        stream = BytesIO(serializer.data)
+        data1 = JSONParser.parser(data)
+        serializer1 = QuestionSerializer(data=data1)
+        print serializer1.is_valid()
+        print serializer1.validated_data
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None, exams_pk=None):
