@@ -90,7 +90,7 @@ else:
             'USER': 'shukoor',
             'PASSWORD': 'rawdata',
             'HOST': 'localhost',
-            'PORT': '5432',
+            'PORT': '',
         }
     }
 
