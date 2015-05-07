@@ -7,8 +7,6 @@ from apps.exams.models import Exam, Test
 
 class QuestionSerializer(serializers.ModelSerializer):
 
-    # owner = serializers.Field('owner.username')
-
     class Meta:
         model = Question
         fields = ('id', 'question_text', )
@@ -25,14 +23,19 @@ class ExamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exam
-        # fields = ('name', 'questions')
         fields = ('name',)
 
 
 class TestSerializer(serializers.ModelSerializer):
 
-    exam = ExamSerializer()
-
+    # exam = ExamSerializer()
     class Meta:
         model = Test
-        fields = ('id', 'name', 'user', 'exam', 'status')
+        read_only_fields = ('user',)
+        fields = ('id', 'name', 'user','exam', 'status')
+
+
+    def create(self, request):
+        request['user'] = self.context['request'].user
+        return super(TestSerializer, self).create(request)
+

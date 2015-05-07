@@ -53,6 +53,10 @@ class TestViewSet(viewsets.ModelViewSet):
     serializer_class = TestSerializer
     permission_classes = (permissions.IsAssignedUser,)
 
+    # @login_required
+    # @detail_route(methods=['post'], permission_classes=(permissions.IsAssignedUser,))
+    
+
     @list_route(methods=['get'], permission_classes=(permissions.IsAssignedUser,))
     def user(self, request):
         self.queryset = self.queryset.filter(user=request.user)
