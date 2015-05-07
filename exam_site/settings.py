@@ -75,14 +75,14 @@ WSGI_APPLICATION = 'exam_site.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-DATABASES = {}
+# DATABASES = {}
 
-if 'test' in sys.argv:
-    DATABASES['default'] = {
-    'ENGINE':'django.db.backends.sqlite3',
-    'NAME': 'test_exam_site2',
-    }
-else:
+# if 'test' in sys.argv:
+#     DATABASES['default'] = {
+#     'ENGINE':'django.db.backends.sqlite3',
+#     'NAME': 'test_exam_site2',
+#     }
+# else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
