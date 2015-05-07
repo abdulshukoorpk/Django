@@ -89,7 +89,7 @@ else:
             'NAME': 'exam_site2',
             'USER': 'shukoor',
             'PASSWORD': 'rawdata',
-            'HOST': 'localhost',
+            'HOST': '',
             'PORT': '',
         }
     }
